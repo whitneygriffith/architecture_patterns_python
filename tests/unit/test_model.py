@@ -55,15 +55,19 @@ def test_can_allocate_if_available_equal_to_required():
     batch.allocate(order_line)
     assert batch.quantity == 0
 
-def test_allocation_is_idempotent():
-    pytest.fail('todo')
-
-
 def test_only_allocates_order_lines_to_batches_with_matching_skus():
-    pytest.fail('todo')
+    batch, order_line = create_batch_order_line("SMALL-TABLE", 20, 2)
+    batch2, order_line2 = create_batch_order_line("LARGE-TABLE", 20, 2)
+    batch.allocate(order_line2)
+    assert batch.can_allocate(order_line2) == False
+    assert batch.quantity == 20
 
 def test_prefers_warehouse_batches_to_shipments():
     pytest.fail('todo')
 
 def test_prefers_earlier_batches():
     pytest.fail('todo')
+
+def test_allocation_is_idempotent():
+    pytest.fail('todo')
+

@@ -56,10 +56,10 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 ## Actions 
 
 - [ ] Allocate order lines to Batches 
-    - [ ] Can only allocate if the Batch quantity is more than or equal to the OrderLine's quantity 
+    - [x] Can only allocate if the Batch quantity is more than or equal to the OrderLine's quantity 
     - [ ] Idempotent 
     - [ ] Matching SKUs 
-    - [ ] Decrement Batch available quantity 
+    - [x] Decrement Batch available quantity 
     - [ ] We allocate to warehouse stock in preference to shipment batches. 
     - [ ] We allocate to shipment batches in order of which has the earliest ETA.
 
