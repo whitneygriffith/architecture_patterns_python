@@ -20,28 +20,59 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 
 
 
-## Process
+## Domain Model
 
+### Product 
+
+* Product is part of the Domain Model 
+* Product has the following  attributes: 
+    - [ ] sku
+
+### Order
+
+* Order is part of the Domain Model 
+* Customers place Orders 
+* Order has the following attributes: 
+    - [ ] ref: order reference
+    - [ ] order_lines: List of OrderLine based on product
+
+### OrderLine 
+
+* OrderLine is part of the Domain Model  
+* OrderLine has the following attributes:
+    - [ ] sku
+    - [ ] quantity 
 
 ### Batch: 
     
-* Batch is a Domain  Model 
-* Batch should have the following  attributes: 
-    - [x] Reference 
-    - [ ] SKU
-    - [ ] Eta 
-    - [ ] Available quantity 
-* Batch should be able to do the following:
-    - [ ] Allocate x items in the Batch based on an order 
-        - [ ] Given current available items 
-        - [ ] Idempotent 
-        - [ ] Matching SKUs 
-        - [ ] Decrement available items 
-    - [ ] Can de-allocate 
-        - [ ] Increment available items 
+* Batch is part of the Domain Model 
+* Batch has  the following  attributes: 
+    - [ ] ref: unique identifier
+    - [ ] sku
+    - [ ] eta 
+    - [ ] quantity 
 
+## Actions 
+
+- [ ] Allocate order lines to Batches 
+    - [ ] Can only allocate if the Batch quantity is more than or equal to the OrderLine's quantity 
+    - [ ] Idempotent 
+    - [ ] Matching SKUs 
+    - [ ] Decrement Batch available quantity 
+    - [ ] We allocate to warehouse stock in preference to shipment batches. 
+    - [ ] We allocate to shipment batches in order of which has the earliest ETA.
+
+- [ ] Can de-allocate order lines from  Batches 
+    - [ ] Increment Batch available items 
+
+## Process:
+- [x] Create the stubs for tests based on expected behavior of the entire model. Set the tests to fail.
+- [ ] Create class for each domain object
+- [ ] Implement the model and the specific behavior  one passing test  at a time
 
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+* Should my test for ensuring allocating orderLines to Batches decrements the Batch quantity  be in `test_model` test suite or its own `test_batch` test suite?
