@@ -79,5 +79,5 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 
 Describe any challenges encountered while building the app.
 
-* Should my test for ensuring allocating orderLines to Batches decrements the Batch quantity  be in `test_model` test suite or its own `test_batch` test suite?
-* In my `test_can_allocate_if_available_greater_than_required` am I effectively unit testing if I assert against the `batch.can_allocate()` or do I need to assert that `batch.allocate` actuall allocates or do I need to do both? 
+* Should my test for ensuring allocating orderLines to Batches decrements the Batch quantity  be in `test_model` test suite or its own `test_batch` test suite? [Related Commit](https://github.com/whitneygriffith/architecture_patterns_python/commit/9a2584383455779fe62a2f0cfc43c319cec01523)
+* In my `test_can_allocate_if_available_greater_than_required` am I effectively unit testing if I assert against the `batch.can_allocate()` or do I need to assert that `batch.allocate` actuall allocates or do I need to do both? [Related Commit](https://github.com/whitneygriffith/architecture_patterns_python/commit/9a2584383455779fe62a2f0cfc43c319cec01523)
