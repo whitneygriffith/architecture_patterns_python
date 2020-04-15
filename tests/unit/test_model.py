@@ -1,6 +1,18 @@
 import domain.model
 import pytest
 
+class  OrderLine:
+    def __init__(self, sku: str, quantity: int):
+        self.sku = sku 
+        self.quantity = quantity
+
+class Batch: 
+    def __init__(self, ref: str, sku: str, eta: str, quantity: int):
+        self.ref = ref
+        self.sku = sku
+        self.eta = eta
+        self.quantity = quantity
+        
 
 def test_allocating_to_a_batch_reduces_the_available_quantity():
     pytest.fail('todo')

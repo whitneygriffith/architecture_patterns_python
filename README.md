@@ -66,8 +66,9 @@ Here’s the innovation: if we have a system that can keep track of all our ship
     - [ ] Increment Batch available items 
 
 ## Process:
+
 - [x] Create the stubs for tests based on expected behavior of the entire model. Set the tests to fail.
-- [ ] Create class for each domain object
+- [x] Create class for relevant domain objects for the `test_model`
 - [ ] Implement the model and the specific behavior  one passing test  at a time
 
 
