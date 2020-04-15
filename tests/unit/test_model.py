@@ -13,8 +13,10 @@ class Batch:
         self.sku = sku
         self.eta = eta
         self.quantity = quantity
-        
 
+    def allocate(self, order_line: OrderLine) -> None: 
+        self.quantity -= order_line.quantity
+        
 def test_allocating_to_a_batch_reduces_the_available_quantity():
     batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
     order_line = OrderLine("SMALL-TABLE", quantity=2)
