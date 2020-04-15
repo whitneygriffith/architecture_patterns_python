@@ -25,30 +25,31 @@ class Batch:
         if self.can_allocate(order_line.quantity):
             self.quantity -= order_line.quantity
 
+def create_batch_order_line(batch_qty: int, order_line_qty: int) -> [Batch, OrderLine]:
+    batch = Batch("batch-001", "SMALL-TABLE", quantity=batch_qty, eta=date.today())
+    order_line = OrderLine("SMALL-TABLE", quantity=order_line_qty)
+    return (batch, order_line)
+
 def test_allocating_to_a_batch_reduces_the_available_quantity():
-    batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
-    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch, order_line = create_batch_order_line(20, 2)
     batch.allocate(order_line)
     assert batch.quantity == 18 
 
 def test_can_allocate_if_available_greater_than_required():
-    batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
-    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch, order_line = create_batch_order_line(20, 2)
     batch.allocate(order_line)
     assert batch.can_allocate(order_line.quantity) == True
     assert batch.quantity == 18
 
 
 def test_cannot_allocate_if_available_smaller_than_required():
-    batch = Batch("batch-001", "SMALL-TABLE", quantity=2, eta=date.today())
-    order_line = OrderLine("SMALL-TABLE", quantity=20)
+    batch, order_line = create_batch_order_line(2, 20)
     batch.allocate(order_line)
     assert batch.can_allocate(order_line.quantity) == False
     assert batch.quantity == 2
 
 def test_can_allocate_if_available_equal_to_required():
-    batch = Batch("batch-001", "SMALL-TABLE", quantity=2, eta=date.today())
-    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch, order_line = create_batch_order_line(2, 2)
     batch.allocate(order_line)
     assert batch.quantity == 0
 
