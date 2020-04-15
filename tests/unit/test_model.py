@@ -16,15 +16,14 @@ class Batch:
         self.eta = eta
         self.quantity = quantity
 
-    def can_allocate(self, quantity: int) -> bool:
-        if quantity < self.quantity:
-            return True
-        elif quantity ==  self.quantity:
-            return True
+    def can_allocate(self, order_line:  OrderLine) -> bool:
+        if order_line.sku == self.sku: 
+            if order_line.quantity <= self.quantity:
+                return True
         return  False
 
     def allocate(self, order_line: OrderLine) -> None: 
-        if self.can_allocate(order_line.quantity):
+        if self.can_allocate(order_line):
             self.quantity -= order_line.quantity
 
 def create_batch_order_line(sku: str, batch_qty: int, order_line_qty: int) -> [Batch, OrderLine]:
@@ -40,14 +39,14 @@ def test_allocating_to_a_batch_reduces_the_available_quantity():
 def test_can_allocate_if_available_greater_than_required():
     batch, order_line = create_batch_order_line("SMALL-TABLE", 20, 2)
     batch.allocate(order_line)
-    assert batch.can_allocate(order_line.quantity) == True
+    assert batch.can_allocate(order_line) == True
     assert batch.quantity == 18
 
 
 def test_cannot_allocate_if_available_smaller_than_required():
     batch, order_line = create_batch_order_line("SMALL-TABLE", 2, 20)
     batch.allocate(order_line)
-    assert batch.can_allocate(order_line.quantity) == False
+    assert batch.can_allocate(order_line) == False
     assert batch.quantity == 2
 
 def test_can_allocate_if_available_equal_to_required():
