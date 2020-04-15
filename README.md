@@ -65,6 +65,8 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 - [ ] Can de-allocate order lines from  Batches 
     - [ ] Increment Batch available items 
 
+- [ ] Raise Domain Exceptions
+
 ## Process:
 
 - [x] Create the stubs for tests based on expected behavior of the entire model. Set the tests to fail.
@@ -77,3 +79,4 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 Describe any challenges encountered while building the app.
 
 * Should my test for ensuring allocating orderLines to Batches decrements the Batch quantity  be in `test_model` test suite or its own `test_batch` test suite?
+* In my `test_can_allocate_if_available_greater_than_required` am I effectively unit testing if I assert against the `batch.can_allocate()` or do I need to assert that `batch.allocate` actuall allocates or do I need to do both? 

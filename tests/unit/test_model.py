@@ -14,9 +14,17 @@ class Batch:
         self.eta = eta
         self.quantity = quantity
 
+    def can_allocate(self, quantity: int) -> bool:
+        if quantity < self.quantity:
+            return True
+        elif quantity ==  self.quantity:
+            return True
+        return  False
+
     def allocate(self, order_line: OrderLine) -> None: 
-        self.quantity -= order_line.quantity
-        
+        if self.can_allocate(order_line.quantity):
+            self.quantity -= order_line.quantity
+
 def test_allocating_to_a_batch_reduces_the_available_quantity():
     batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
     order_line = OrderLine("SMALL-TABLE", quantity=2)
@@ -24,13 +32,25 @@ def test_allocating_to_a_batch_reduces_the_available_quantity():
     assert batch.quantity == 18 
 
 def test_can_allocate_if_available_greater_than_required():
-    pytest.fail('todo')
+    batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
+    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch.allocate(order_line)
+    assert batch.can_allocate(order_line.quantity) == True
+    assert batch.quantity == 18
+
 
 def test_cannot_allocate_if_available_smaller_than_required():
-    pytest.fail('todo')
+    batch = Batch("batch-001", "SMALL-TABLE", quantity=2, eta=date.today())
+    order_line = OrderLine("SMALL-TABLE", quantity=20)
+    batch.allocate(order_line)
+    assert batch.can_allocate(order_line.quantity) == False
+    assert batch.quantity == 2
 
 def test_can_allocate_if_available_equal_to_required():
-    pytest.fail('todo')
+    batch = Batch("batch-001", "SMALL-TABLE", quantity=2, eta=date.today())
+    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch.allocate(order_line)
+    assert batch.quantity == 0
 
 def test_allocation_is_idempotent():
     pytest.fail('todo')
