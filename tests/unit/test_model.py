@@ -1,5 +1,6 @@
 import domain.model
 import pytest
+from datetime import date
 
 class  OrderLine:
     def __init__(self, sku: str, quantity: int):
@@ -7,7 +8,7 @@ class  OrderLine:
         self.quantity = quantity
 
 class Batch: 
-    def __init__(self, ref: str, sku: str, eta: str, quantity: int):
+    def __init__(self, ref: str, sku: str, quantity: int, eta: str):
         self.ref = ref
         self.sku = sku
         self.eta = eta
@@ -15,7 +16,10 @@ class Batch:
         
 
 def test_allocating_to_a_batch_reduces_the_available_quantity():
-    pytest.fail('todo')
+    batch = Batch("batch-001", "SMALL-TABLE", quantity=20, eta=date.today())
+    order_line = OrderLine("SMALL-TABLE", quantity=2)
+    batch.allocate(order_line)
+    assert batch.quantity == 18 
 
 def test_can_allocate_if_available_greater_than_required():
     pytest.fail('todo')
