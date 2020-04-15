@@ -44,7 +44,7 @@ Here’s the innovation: if we have a system that can keep track of all our ship
     - [ ] quantity 
     - [ ] ref
 
-### Batch: 
+### Batch 
     
 * Batch is part of the Domain Model 
 * Batch has  the following  attributes: 
@@ -58,7 +58,7 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 - [ ] Allocate order lines to Batches 
     - [x] Can only allocate if the Batch quantity is more than or equal to the OrderLine's quantity 
     - [ ] Idempotent 
-    - [ ] Matching SKUs 
+    - [x] Matching SKUs 
     - [x] Decrement Batch available quantity 
     - [ ] We allocate to warehouse stock in preference to shipment batches. 
     - [ ] We allocate to shipment batches in order of which has the earliest ETA.
