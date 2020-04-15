@@ -42,6 +42,7 @@ Here’s the innovation: if we have a system that can keep track of all our ship
 * OrderLine has the following attributes:
     - [ ] sku
     - [ ] quantity 
+    - [ ] ref
 
 ### Batch: 
     
